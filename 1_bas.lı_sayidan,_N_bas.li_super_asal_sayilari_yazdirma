@@ -1,0 +1,57 @@
+//2 dosyayı alt alta yazdım. Bunların location'ları aynı yerde olursa çalıştırabilrisin, yoksa çalışmaz ikisi birden.
+
+//dosya ismimiz, main_super_asal_2
+
+import java.util.Scanner;
+import java.util.*;
+//3119 ve 7331 süper asal--> 4 bas.lı, 593 ve 311 süper asal
+public class main_super_asal_2{
+  
+	public static void main(String args[]){
+		
+	//int dizi[] = new int [100]; 
+	System.out.println("Bir sayı giriniz: ");
+		super_asal_2 nesne=new super_asal_2();		
+		Scanner bilgi=new Scanner(System.in);	
+	int	 ab=bilgi.nextInt();
+		nesne.sayi=ab;
+		if(nesne.super_asal_mi(ab)==1)
+			System.out.println("süper asal ");
+				else
+					System.out.println("malesef süper asal değil ");
+			
+	
+		}		
+}
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+//recursive biçimde yazdım
+
+public class super_asal_2{
+public int sayi;
+
+  public int super_asal_mi(int sayi){
+		int a,b,k;
+			if(sayi<=9 && sayi>=0){ 		//cas de base
+				if(sayi==2 || sayi==3 || sayi==5 || sayi==7)
+					return 1;
+					else 
+						return 0;	}	
+			else{   	//cas general
+	 a=2;b=1;
+	do{
+			if(sayi%a==0)
+					b=0;
+			
+					a++;	}
+		while(a<=Math.sqrt(sayi) && b!=0);
+
+		if(b==0)
+			 k=0;	//System.out.print("Asal Sayı Değil");
+			else
+				 k=1;	//System.out.print("Asal Sayı");				
+				return super_asal_mi(sayi/10)*k;			
+			}
+				}		
+}
