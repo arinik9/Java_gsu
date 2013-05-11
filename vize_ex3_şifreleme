@@ -1,0 +1,136 @@
+2 çıktı örneği:
+/*textField' a girilen cümle: BugünBanaGel
+...........
+............
+............
+............
+............
+.....nba....
+.....übn....
+.....gua....
+.....leg....
+............
+............
+............
+///////////////////////////////
+//textField' a girilen cümle: bugünbana
+.........
+.........
+.........
+...nba...
+...übn...
+...gua...
+.........
+.........
+.........*/
+
+
+
+import java.awt.*;
+import java.awt.event.*;
+
+//Basit bir Window Uygulaması
+
+public class vize_ex3 implements WindowListener, ActionListener
+{
+    Frame a;
+    Panel b;
+    TextField c;
+    Button dugme;
+
+    public vize_ex3(String title){
+
+  	a=new Frame(title);
+        b=new Panel();
+        c=new TextField(20);
+        dugme=new Button("OK");
+        }
+
+        public void olustur()
+        {
+        	  a.setSize(500,500);
+            a.setBackground(Color.white);
+            a.setLocation(500,500);
+            a.setBackground(Color.yellow);
+        	
+        	b.add(c);
+        	b.add(dugme);
+        	dugme.addActionListener(this);
+        	a.add(b);
+        	a.pack();
+            a.addWindowListener(this);
+            a.setVisible(true);
+            }
+
+
+    public static void main(String args[])
+    {
+        vize_ex3 pencere=new vize_ex3("Merhaba");
+        pencere.olustur();
+        }
+
+public void actionPerformed(ActionEvent e){
+        //String s=e.getActionCommand();
+            /*if(s.equals("TL'ye ÇEVİR")){
+                }*/
+                String a=c.getText();
+                int i,j,n,k,z,g=0,tk=1,ts=1,h=0,yon=0;
+                n=a.length();
+                char b[][]=new char[n][n];
+                
+                if(n==2)
+                	k=0;
+                	else 
+                		k=n/2;
+                	for(i=0;i<n;i++)
+                		for(j=0;j<n;j++)
+                			b[i][j]='.';
+                			
+                			j=k;
+                			z=k;
+                			b[j][z]=a.charAt(0);
+                			j++;
+                			
+                			for(i=1;i<a.length();i++){
+                			b[j][z]=a.charAt(i);
+                			g++;
+                			if((g==tk)&&(h==0)){
+                				tk++;
+                				h=1;
+                				g=0;
+                				yon=(yon+1)%4;
+                			}
+                			if((g==ts)&&h==1){
+                				ts++;
+                				h=0;
+                				g=0;
+                				yon=(yon+1)%4;
+                			}
+                			switch(yon){
+                				case 0: j++;  break;
+                				case 1: z--;  break;
+                				case 2: j--;  break;
+                				case 3: z++;  break;
+                			}
+                	}
+             for(i=0;i<n;i++){
+             	for(j=0;j<n;j++)
+             		System.out.print(b[i][j]);
+             	System.out.println();
+             }   
+                
+        }
+        public void windowClosing(WindowEvent e)
+            {
+            System.exit(0);
+            }
+
+            public void windowOpened(WindowEvent e){}
+                public void windowClosed(WindowEvent e){}
+                    public void windowIconified(WindowEvent e){}
+                        public void windowDeiconified(WindowEvent e){}
+                            public void windowActivated(WindowEvent e){}
+                                    public void windowDeactivated(WindowEvent e){}
+
+
+    }
