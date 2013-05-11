@@ -1,0 +1,121 @@
+
+//pinpon_önceki_çalışmadan_1saat_sonraki_3_olan_kazanıyor,ve her sayı oldugunda,top ortadan başlıo
+
+
+import java.applet.Applet;
+import java.awt.*;
+import java.awt.event.*;
+import java.applet.*;
+
+
+//Bilardo topu hareketi
+public class bilardo extends Applet implements KeyListener{
+  
+	double pi=3.1415;
+	Integer x,y;
+	Double r3=new Double(361*Math.random());
+	Integer teta=new Integer(r3.intValue());
+	int y1 = 125, y2 = 125;
+	int bayrak=0,f=1,bayrak_yeniden_ortadan=1; 
+	int sayac_sol=0,sayac_sag=0;
+	
+	public void init(){
+		setBackground(Color.yellow);
+		addKeyListener(this);
+		}
+ 
+ 		
+		public void paint(Graphics g)
+		{	
+		if(bayrak_yeniden_ortadan==1){
+			do{
+				x=240;
+				y=140;
+	       	r3=new Double(361*Math.random()); 
+			teta=new Integer(r3.intValue());
+			}while((r3<=15 && r3>=0) || (r3<=105 && r3>=65) || (r3<=195 && r3>=160) || (r3<=285 && r3>=250) || (r3<=360 && r3>=340));
+		} bayrak_yeniden_ortadan=0;
+			
+		g.drawLine(0,0,0,300);
+		g.drawLine(0,0,500,0);
+		g.drawLine(500,0,500,300);
+		g.drawLine(0,300,500,300);
+		g.drawRect(50,y1,10,50);
+		g.drawRect(440,y2,10,50);
+			g.fillOval(x,y,10,10);
+			if((sayac_sol<3 && sayac_sag<3) && (bayrak==0)){
+			x=(int)(x+5*Math.cos(2*pi*teta/360));
+			y=(int)(y+5*Math.sin(2*pi*teta/360));
+			}
+			
+				if( (y<=0) || (y>=290) ) 
+				teta=360-teta;
+				if( (x<=0) || (x>=490) ) 
+				teta=180-teta;
+				
+				// rakete vurunca tam yansıma yapsın diye, topun sol ve sagdaki rakete gelince 2 tane çarpma noktası önemli, aralarında da || isreti koyuyoruz
+				if( ((y1<y+10 && y+10<y1+50) && (57<x && x<62)) || ((y1<y && y<y1+50) && (57<x && x<62)) ){	//soldaki oyuncu için
+						teta=180-teta;
+						x=(int)(x+5*Math.cos(2*pi*teta/360));
+						y=(int)(y+5*Math.sin(2*pi*teta/360));
+				}
+				
+				if( ((y2<y && y<y2+50) && (447<x+10 && x+10<462)) || ((y2<y+10 && y+10<y2+50) && (447<x+10 && x+10<462))    ){  // sağdaki oyuncu için
+						teta=180-teta;
+						x=(int)(x+5*Math.cos(2*pi*teta/360));
+						y=(int)(y+5*Math.sin(2*pi*teta/360));
+				}
+				
+				if((x==1 || x==2 || x==3 || x==4 || x==0) && f==1){
+					sayac_sol++;
+				f=0;
+				bayrak_yeniden_ortadan=1;
+				}f=1;
+						if((x+10>=494 && x+10<=500)  && f==1){
+					//	if((x==499 || x==500)  && f==1){
+					sayac_sag++;
+						f=0;
+						bayrak_yeniden_ortadan=1;
+				}f=1;
+					
+					if(sayac_sol==3 || sayac_sag==3)
+				bayrak=1;
+				
+					
+			Font tt=new Font("Arial",Font.PLAIN,10);
+			g.setFont(tt);
+
+
+				g.drawString("GOL SAYISI: "+sayac_sol,10,35);
+				g.drawString("GOL SAYISI: "+sayac_sag,450,35);
+				
+			try{
+				Thread.sleep(60);
+				}
+			catch(InterruptedException e){}
+
+			repaint();
+			}
+			
+				
+		public void keyPressed(KeyEvent e){
+	int tus = e.getKeyCode();
+
+	if(tus == KeyEvent.VK_UP) y1 = y1 - 5;
+	if(tus == KeyEvent.VK_DOWN) y1 = y1 + 5;
+	if(tus == KeyEvent.VK_A) y2 = y2 - 5;
+	if(tus == KeyEvent.VK_Z) y2 = y2 + 5;
+	repaint();
+	}
+	public void keyReleased(KeyEvent e){
+	}
+
+	public void keyTyped(KeyEvent e){
+	}
+
+}
+			
+			
+			
+			
+		
