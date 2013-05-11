@@ -1,0 +1,39 @@
+/**
+ * @(#)deneme45.java
+ *
+ * deneme45 Applet application
+ *
+ * @author 
+ * @version 1.00 2013/5/5
+ */
+ 
+import java.awt.*;
+import java.applet.Applet;
+import java.awt.event.*;
+
+public class deneme45 extends Applet{
+  int x_cubuk=100,y_cubuk=100,x_cubuk2=100,y_cubuk2=100;//,x2_cubuk,y2_cubuk;
+	Double pi=2*3.1419/360;
+	int teta=0;
+	
+	public void init() {
+	}
+
+	public void paint(Graphics g) {
+		
+	g.drawLine(x_cubuk,y_cubuk,x_cubuk2,y_cubuk2);
+	
+	x_cubuk=100+(int)(60*Math.cos(pi*teta));
+	y_cubuk=100-(int)(60*Math.sin(pi*teta));
+	x_cubuk2=100-(int)(60*Math.cos(pi*teta));
+	y_cubuk2=100+(int)(60*Math.sin(pi*teta));
+	
+	teta=teta+10;
+		
+		
+		try{
+			Thread.sleep(100);
+			}catch(Exception e){}
+		repaint();
+	}
+}
