@@ -1,0 +1,64 @@
+// quiz http://www.realapplets.com/tutorial/ActionExample.html sayfasından alınmıstır.
+
+import java.awt.*;
+import java.applet.Applet;
+import java.awt.event.*;
+
+public class gui2 extends Applet implements ActionListener{
+  	Button a,b;
+	CheckboxGroup renk;
+		Checkbox kirmizi,yesil,sari;
+	TextField yazi;
+	String mesaj;
+	public void init(){
+		
+		 a=new Button("Ok");
+		 b=new Button("No");
+		add(a);
+		add(b);
+		
+		a.addActionListener(this);
+		b.addActionListener(this);
+		renk=new CheckboxGroup();
+	kirmizi=new Checkbox("Kırmızı",renk,true);
+		
+		yesil=new Checkbox("Yesil",renk,false);
+sari=new Checkbox("Sari",renk,false);
+		
+		add(kirmizi);
+		add(yesil);
+		add(sari);
+		
+		yazi=new TextField("burda yazı var",50);
+		add(yazi);
+	}
+	
+	public void paint(Graphics p){
+		  if (kirmizi.getState()) p.setColor(Color.red);
+		    if (yesil.getState()) p.setColor(Color.green);  
+		  if (sari.getState()) p.setColor(Color.yellow); 
+		
+		
+		p.drawString(""+mesaj,100,100);
+	}
+	
+	public void actionPerformed(ActionEvent e){
+		
+		String s=e.getActionCommand();
+		
+		if(s.equals("Ok")){
+			mesaj=yazi.getText();
+			repaint();
+			
+		}
+		if(s.equals("No")){		
+    mesaj="Yanlış Buton";
+		yazi.setText("Yanlış Buton");
+			repaint();
+		}
+
+	
+	}
+		
+	
+}
