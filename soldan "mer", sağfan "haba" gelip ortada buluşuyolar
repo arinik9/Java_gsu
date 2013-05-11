@@ -1,0 +1,38 @@
+import java.awt.*;
+import java.applet.Applet;
+import java.awt.event.*;
+public class Nejat1 extends Applet
+{
+ String mesaj1="MER";
+ String mesaj2="HABA";
+int x=0,y=410;
+
+/*
+ public void init()
+ {
+   }*/
+   public void paint(Graphics p)
+   {
+        p.drawString(""+mesaj1,x,150);
+        p.drawString(""+mesaj2,y,150);
+
+if(x<235)
+   x=x+1;
+
+if(y>260)
+   y=y-1;
+
+
+   try
+   {
+       Thread.sleep(20);
+       }
+       catch(Exception e){}
+       repaint();
+       
+   }
+
+
+ }
+
+
