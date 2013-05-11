@@ -1,0 +1,44 @@
+import java.awt.event.*;
+import java.awt.*;
+import java.applet.Applet;
+
+public class nejat1 extends Applet implements MouseListener, MouseMotionListener{
+
+Double c,d,f;
+int b,r,h,w;
+
+
+public void init() {
+addMouseListener(this);
+addMouseMotionListener(this);
+}
+
+public void paint(Graphics g) {
+    setBackground(new Color(b,r,h));
+}
+
+public void mouseMoved(MouseEvent e){
+    c=new Double(255*Math.random());
+    b=c.intValue();
+    d=new Double(255*Math.random());
+    r=d.intValue();
+    f=new Double(255*Math.random());
+    h=f.intValue();
+
+
+repaint();
+}
+
+public void mousePressed(MouseEvent e){
+}
+public void mouseDragged(MouseEvent e){
+}
+public void mouseReleased(MouseEvent e){
+}
+public void mouseClicked(MouseEvent e){
+}
+public void mouseEntered(MouseEvent e){
+}
+public void mouseExited(MouseEvent e){
+}
+}
