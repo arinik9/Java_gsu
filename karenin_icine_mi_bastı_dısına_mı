@@ -1,0 +1,68 @@
+// karenin içine mi bastın dışına mı appleti
+
+//if(a!= null)  koşulunu araması işmize yarayabilir
+
+import java.awt.*;
+import java.applet.Applet;
+import java.awt.event.*;
+
+public class quiz extends Applet implements MouseListener,MouseMotionListener
+{
+  Point a;
+	boolean flag=false,flag2=false;
+	public void init()
+	{
+		addMouseListener(this);
+		addMouseMotionListener(this);
+	}
+	
+	public void paint(Graphics p)
+	{
+		p.fillRect(50,50,100,100);
+		if(a!=null)
+		{
+			if(flag2)
+			{
+				if(a.x>=50 && a.x<=150 && a.y>=50 && a.y<=150)
+				{
+					p.setColor(Color.cyan);
+						p.drawString("İçinde Tıklandı",250,220);
+				}
+				else
+						p.drawString("Dısında Tıklandı",250,220);
+			}
+				
+		
+		}
+		if(flag)
+		{
+			p.drawString("Applet Dısındasın",250,200);
+		}
+	
+		
+	}
+	
+	
+	public void mouseClicked(MouseEvent e){
+		a=e.getPoint();
+		flag2=true;
+		repaint();
+	}
+	public void mousePressed(MouseEvent e){
+	}
+	public void mouseReleased(MouseEvent e){
+		
+	}
+	public void mouseDragged(MouseEvent e){
+	}
+	public void mouseMoved(MouseEvent e){
+	}
+	public void mouseEntered(MouseEvent e){
+		flag=false;
+		repaint();
+	}
+	public void mouseExited(MouseEvent e){
+		flag=true;
+		repaint();
+	}
+} 
