@@ -1,0 +1,47 @@
+/**
+
+ * @version 1.00 13/03/11
+ */
+ 
+import java.awt.*;
+import java.applet.Applet;
+import java.awt.event.*;
+
+public class nejo extends Applet implements KeyListener{
+  
+	int x=200,y=200;
+	String isaret="+";
+	
+	public void init() {
+		addKeyListener(this);
+	}
+
+	public void paint(Graphics g) {
+		
+		Font tt=new Font("Arial",Font.PLAIN,45);
+			g.setFont(tt);
+		g.drawString(""+isaret, x, y );
+	}
+
+public void keyPressed(KeyEvent e){
+	
+	int tus=e.getKeyCode();
+	switch(tus)
+	{
+		case(KeyEvent.VK_UP): y=y-10; break;
+		case(KeyEvent.VK_DOWN): y=y+10; break;
+		case(KeyEvent.VK_LEFT): x=x-10; break;
+		case(KeyEvent.VK_RIGHT): x=x+10; break;
+		
+	} repaint();
+	
+ }
+
+public void keyReleased(KeyEvent e){
+	}
+	
+	public void keyTyped(KeyEvent e){
+	}
+
+
+}
