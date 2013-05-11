@@ -1,0 +1,32 @@
+public class vize_ex1{
+  public static void main(String  args[]){
+		for(int i=100000;i<1000000;i++){
+			int k=0,n,m;
+			for(int j=2;j<=Math.sqrt(i);j++)
+				if(i%j==0)k++;
+				if(k==0){
+					int z1=0,z2=0;
+					String a=String.valueOf(i);
+					for(n=0;n<a.length();n++){
+						int t=0;
+						for(m=0;m<a.length();m++)
+							if(a.charAt(n)==a.charAt(m))
+								t++;
+								if(t==1)
+									z1=n;
+									if(t==5){
+										k=1;
+										z2=n;
+									}
+						}
+									if(k==1){
+										int rakam1=Integer.valueOf(a.substring(z1,z1+1));
+										int rakam2=Integer.valueOf(a.substring(z2,z2+1));
+										m=Math.abs(rakam1-rakam2);
+										if(m==1)
+											System.out.print(i+" ");
+									}
+					}
+				}
+			}
+		}
