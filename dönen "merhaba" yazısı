@@ -1,0 +1,38 @@
+import java.awt.event.*;
+import java.applet.Applet;
+import java.awt.*;
+import java.applet.*;
+
+public class donen_mer extends Applet {
+double teta = 0;
+String m = "M", e = "E", r = "R", h = "H", a = "A", b = "B";
+public void init() {
+setBackground(Color.ORANGE);
+}
+
+public void paint(Graphics g) {
+g.drawString("" + a, 120 - (int)(Math.cos(teta) * 60), 120 - (int)(Math.sin(teta) * 60));
+teta = teta + 3.1419 / 12;
+g.drawString("" + b, 120 - (int)(Math.cos(teta) * 60), 120 - (int)(Math.sin(teta) * 60));
+teta = teta + 3.1419 / 12;
+g.drawString("" + a, 120 - (int)(Math.cos(teta) * 60), 120 - (int)(Math.sin(teta) * 60));
+teta = teta + 3.1419 / 12;
+g.drawString("" + h, 120 - (int)(Math.cos(teta) * 60), 120 - (int)(Math.sin(teta) * 60));
+teta = teta + 3.1419 / 12;
+g.drawString("" + r, 120 - (int)(Math.cos(teta) * 60), 120 - (int)(Math.sin(teta) * 60));
+teta = teta + 3.1419 / 12;
+g.drawString("" + e, 120 - (int)(Math.cos(teta) * 60), 120 - (int)(Math.sin(teta) * 60));
+teta = teta + 3.1419 / 12;
+g.drawString("" + m, 120 - (int)(Math.cos(teta) * 60), 120 - (int)(Math.sin(teta) * 60));
+
+teta = teta + 3.1419 / 120 - 3.1419 / 2;
+repaint();
+try{
+Thread.sleep(100);
+}
+catch(Exception e){
+}
+
+
+}
+}
