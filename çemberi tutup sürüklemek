@@ -1,0 +1,59 @@
+
+import java.awt.*;
+import java.applet.Applet;
+import java.awt.event.*;
+
+public class nejo extends Applet implements MouseListener,MouseMotionListener{
+  
+	Point a;
+	int x=200,y=150,k=0,d,k1,k2;
+	
+	public void init() {
+		setBackground(Color.yellow);
+		addMouseListener(this);
+		addMouseMotionListener(this);
+	}
+
+	public void paint(Graphics g) {
+		
+		g.fillOval(x,y,40,40);
+	}
+
+	public void mousePressed(MouseEvent e){
+		
+		a=e.getPoint();
+		d=(int)Math.sqrt( (x+20-a.x)*(x+20-a.x) + (y+20-a.y)*(y+20-a.y) );
+		k1=a.x-x;
+		k2=a.y-y;
+		if(d<=20) k=1;
+
+	
+    }
+
+	public void mouseEntered(MouseEvent e){
+	}
+	
+	public void mouseExited(MouseEvent e){
+	}
+	
+	public void mouseMoved(MouseEvent e){
+	}
+	
+	public void mouseReleased(MouseEvent e){
+		k=0;
+		repaint();
+	}
+	
+	public void mouseClicked(MouseEvent e){
+	}
+
+	public void mouseDragged(MouseEvent e){
+			if(k==1){
+	
+	a=e.getPoint();
+	x=a.x-k1;
+	y=a.y-k2;
+	repaint();
+					}
+	}
+}
