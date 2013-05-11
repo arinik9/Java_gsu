@@ -1,0 +1,27 @@
+  
+
+		//Printerdan çıktı alan program
+		
+		import java.awt.*;
+		import java.awt.print.*;
+		
+		public class y104 implements Printable{
+			public int print (Graphics g, PageFormat pf, int sayfa){
+			if(sayfa!=0)return NO_SUCH_PAGE;
+			g.drawOval(100,100,200,200);
+			g.drawString("merhaba",150,200);
+			return PAGE_EXISTS;
+			} 
+			
+			public static void main(String args[]){
+			try{
+			PrinterJob islem=PrinterJob.getPrinterJob();
+			islem.setPrintable(new y104());
+			if(islem.printDialog()) islem.print();
+			}catch(Exception e){
+				System.out.println("Beklenmeyen bir sorun oluştu!");
+			}
+			
+			}
+		
+		}
