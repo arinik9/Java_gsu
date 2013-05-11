@@ -1,0 +1,38 @@
+//tam yansıma_bilardo topu
+import java.awt.*;
+import java.applet.Applet;
+//Bilardo topu hareketi
+public class nejo extends Applet {
+  
+	double pi=3.1415;
+	Double r1=new Double(501*Math.random());
+    Integer x=new Integer(r1.intValue());
+    Double r2=new Double(301*Math.random());
+	Integer y=new Integer(r2.intValue());
+	Double r3=new Double(361*Math.random());
+	Integer teta=new Integer(r3.intValue());
+	
+	public void init(){
+		setBackground(Color.yellow);
+		}
+		
+		public void paint(Graphics t)
+		{
+			t.fillOval(x,y,10,10);
+			x=(int)(x+5*Math.cos(2*pi*teta/360));
+			y=(int)(y+5*Math.sin(2*pi*teta/360));
+			
+			if( (y<=0) || (y>=290) ) 
+				teta=360-teta;
+				
+				if( (x<=0) || (x>=490) ) 
+				teta=180-teta;
+			
+			try{
+				Thread.sleep(20);
+				}
+			catch(InterruptedException e){}
+			repaint();
+			
+			}
+}		
