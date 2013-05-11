@@ -1,0 +1,68 @@
+import java.awt.*;
+import java.applet.Applet;
+import java.awt.event.*;
+public class nej extends Applet implements ActionListener
+{
+    int i=110,j=0;
+ Button a,b;
+
+
+
+ public void init()
+ {
+  a=new Button("DOLDUR");
+  b=new Button("BOSALT");
+
+
+  a.addActionListener(this);
+  add(a);
+   b.addActionListener(this);
+  add(b);
+
+
+   }
+
+   public void paint(Graphics p)
+   {
+
+    p.fillRect(50,50,20,80);
+    p.fillRect(50,110,80,20);
+    p.fillRect(110,50,20,80);
+
+        // p.fillRect(70,110-10*y,40,10*y);
+   	p.setColor(Color.blue);
+        p.fillRect(70,i,40,j);
+
+   //p.drawString(""+mesaj,200,150);
+   }
+
+   public void actionPerformed(ActionEvent e)
+   {
+   String s=e.getActionCommand();
+    if(s.equals("DOLDUR"))
+    {
+    	if(i>50){
+      i=i-10;
+      j=j+10;
+    	}
+    repaint();
+    }
+
+    if(s.equals("BOSALT"))
+    {
+     	if(i<110){
+      i=i+10;
+      j=j-10;
+    	}   
+
+    repaint();
+    }
+
+
+
+ }
+
+
+
+
+ }
