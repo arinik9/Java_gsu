@@ -1,0 +1,27 @@
+import java.awt.*;
+import java.applet.Applet;
+
+public class donen_cubuk_saat extends Applet
+{
+  int i=0,y=0;
+	double teta=3.14/2;
+	
+		public void init(){
+	}
+
+	public void paint(Graphics p)
+	{	
+		teta=teta-(3.14/20);
+		i=(int)(50*Math.cos(teta));
+	y=50-(int)(50*Math.sin(teta));
+				p.drawLine(150,200,150+i,150+y);
+				
+		try{
+			Thread.sleep(100);
+		}
+		catch(Exception e){}
+		repaint();		
+	}
+	
+}
+
