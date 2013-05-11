@@ -1,0 +1,29 @@
+public class deneme29{
+  public static void main(String args[]){
+		
+		yeni1 a=new yeni1();
+		a.en=1.5;
+		a.boy=1.7;
+		a.alan();
+		
+		}
+	
+	}
+
+	
+	
+	////////////////////////////////////////////////////////////////////////////////////
+
+
+	
+	public class yen1{
+		
+		public double en;
+		public double boy;
+		
+		public void alan(){
+			double alan=en*boy;
+			system.out.println("Alan="+alan);
+			
+			}
+	}
