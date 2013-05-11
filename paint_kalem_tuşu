@@ -1,0 +1,35 @@
+import java.awt.*;
+import java.applet.*;
+import java.awt.event.*;
+public class o extends Applet implements MouseListener, MouseMotionListener {
+Point a,b;
+public void init() {
+setBackground(Color.yellow);
+addMouseListener(this);
+addMouseMionListener(this);
+}
+public void paint(Graphics g) {
+
+}
+public void mouseMoved(MouseEvent e){
+}
+public void mousePressed(MouseEvent e){
+a=e.getPoint();
+
+}
+public void mouseDragged(MouseEvent e){
+    b=e.getPoint();
+    Graphics p=getGraphics();
+    p.drawLine(a.x,a.y,b.x,b.y);
+a=b;
+
+}
+public void mouseReleased(MouseEvent e){
+}
+public void mouseClicked(MouseEvent e){
+}
+public void mouseEntered(MouseEvent e){
+}
+public void mouseExited(MouseEvent e){
+}
+}
