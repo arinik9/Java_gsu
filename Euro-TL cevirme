@@ -1,5 +1,6 @@
 import java.awt.*;
 import java.awt.event.*;
+//3 kutucukla yaptım, 2 kutucukla demişti hoca
 
 //Basit bir Window Uygulaması
 public class euro_tl implements WindowListener, ActionListener
