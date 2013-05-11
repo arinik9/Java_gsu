@@ -1,0 +1,145 @@
+import java.awt.*;
+import java.applet.*;
+import java.awt.event.*;
+
+public class helikopter extends Applet implements KeyListener{
+
+                int x1=20,y1=80,x2=410,y2=80,teta=0,pervane_x1,pervane_y1,pervane_x2,pervane_y2,k1,k2,xen1,xen2;
+                int per2_x1,per2_y1,per2_x2,per2_y2;
+                boolean flag1=false,flag2=false,top_carpısma=false,oyun_sonu;
+
+                public void init() {
+
+                               setBackground(Color.yellow);
+                               addKeyListener(this);
+                               pervane_x1=x1+70;
+                               pervane_y1=y1-25;
+                               pervane_x2=x1;
+                               pervane_y2=y1-25;
+                               k1=x1+70;
+                               k2=x2-15;
+                                 	xen1=y1+20;
+                               		xen2=y2+20;
+                               
+                               per2_x1=x2+70;
+                               per2_y1=y2-25;
+                               per2_x2=x2;
+                               per2_y2=y2-25;
+                }
+
+               public void paint(Graphics g) {
+
+g.drawRect(x1,y1,70,50);
+g.drawLine(x1+35,y1,x1+35,y1-25);
+g.drawRect(x2,y2,70,50);
+g.drawLine(x2+35,y2,x2+35,y2-25);
+g.drawOval(x1,y1-40,70,30);
+g.drawOval(x2,y2-40,70,30);
+
+
+g.drawLine(pervane_x1,pervane_y1,pervane_x2,pervane_y2);
+//	g.drawLine(x1+70,y1-25,x1,y1-25);
+
+//1. Helikopter için 
+pervane_x1=x1+35+(int)(35*Math.cos(teta*2*3.1419/360));
+pervane_x2=x1+35-(int)(35*Math.cos(teta*2*3.1419/360));
+pervane_y1=y1-25-(int)(15*Math.sin(teta*2*3.1419/360));
+pervane_y2=y1-25+(int)(15*Math.sin(teta*2*3.1419/360));
+
+//2. Helikopter için
+g.drawLine(per2_x1,per2_y1,per2_x2,per2_y2);
+
+per2_x1=x2+35+(int)(35*Math.cos(teta*2*3.1419/360));
+per2_x2=x2+35-(int)(35*Math.cos(teta*2*3.1419/360));
+per2_y1=y2-25-(int)(15*Math.sin(teta*2*3.1419/360));
+per2_y2=y2-25+(int)(15*Math.sin(teta*2*3.1419/360));
+
+if(oyun_sonu==false)
+teta=teta+50;
+
+if(flag1==true){
+if(k1<485 && top_carpısma==false)
+g.drawOval(k1,xen1,5,5);
+
+k1=k1+10;
+if(k1>495){
+flag1=false;
+k1=x1+70;
+}
+}
+
+if(flag2==true){
+if(k2>15 && top_carpısma==false)
+g.drawOval(k2,xen2,5,5);
+k2=k2-10;
+if(k2<5){
+flag2=false;
+k2=x2-15;
+}
+}
+
+
+//iki mermi de ayni hizdaysa ve çarpışırsa, yeniden mermi atarlar
+if(xen1==xen2 && Math.abs(k1-k2)<6){
+	top_carpısma=true;
+	flag1=false;
+	flag2=false;
+	 k1=x1+70;
+     k2=x2-15;
+   	xen1=y1+20;
+     	xen2=y2+20;
+}
+
+if(xen1>y2-4 && xen1<y2+46 && k1<x2+70 && k1>x2-4 && top_carpısma==false){
+	oyun_sonu=true;
+	flag2=false;
+	flag1=false;
+}
+
+
+if(xen2>y1-4 && xen2<y1+46 && k2<x1+70 && k2>x1-4 && top_carpısma==false){
+	oyun_sonu=true;
+	flag2=false;
+	flag1=false;
+}
+
+
+
+ try{
+Thread.sleep(100);
+}
+catch(Exception e){};
+  repaint();
+                }
+
+
+public void keyTyped(KeyEvent e){
+}
+
+public void keyPressed(KeyEvent e){
+int tus=e.getKeyCode();
+switch(tus){
+case(KeyEvent.VK_UP):	if(y2>40) y2=y2-10;
+break;
+case(KeyEvent.VK_DOWN):	if(y2<250) y2=y2+10;
+break;
+case(KeyEvent.VK_Q):	if(y1>40)	y1=y1-10;
+break;
+case(KeyEvent.VK_A):	if(y1<250)	y1=y1+10;
+break;
+
+case(KeyEvent.VK_LEFT):	if(oyun_sonu==false){
+flag1=true; 	top_carpısma=false;}
+break;
+
+case(KeyEvent.VK_RIGHT):	if(oyun_sonu==false){
+flag2=true; top_carpısma=false;}
+break;
+}
+repaint();
+}
+
+public void keyReleased(KeyEvent e){
+}
+
+}
