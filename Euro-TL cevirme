@@ -1,0 +1,90 @@
+import java.awt.*;
+import java.awt.event.*;
+
+//Basit bir Window Uygulaması
+public class euro_tl implements WindowListener, ActionListener
+{
+    Frame a;
+    Panel b;
+    Button dugme1,dugme2;
+    Label etiket1,etiket2;
+    TextField c,d,el;
+    String s1,s2;
+    double girilen_para1,cevrilen_para1,girilen_para2,cevrilen_para2;
+    String cevrilen_para2_string,cevrilen_para1_string;
+
+    public euro_tl(String title){
+
+        c= new TextField(20);
+        d= new TextField(30);
+        el= new TextField(30);
+        a=new Frame(title);
+        b=new Panel();
+        dugme1=new Button("TL'ye ÇEVİR");
+        dugme2=new Button("EURO'ya ÇEVİR");
+        etiket1=new Label("Türk Lirası ( TL ) ");
+        etiket2=new Label(" Euro ( € ) ");
+        }
+
+        public void olustur()
+        {
+        
+        	
+            a.setSize(500,500);
+            a.setBackground(Color.white);
+            a.setLocation(500,500);
+            a.setBackground(Color.yellow);
+            b.add(c);
+            dugme1.addActionListener(this);
+            b.add(dugme1);
+             b.add(d);
+             b.add(etiket1);
+           dugme2.addActionListener(this);
+             b.add(dugme2);
+             b.add(el);
+             b.add(etiket2);
+            a.add(b);
+            a.pack();
+            a.addWindowListener(this);
+            a.setVisible(true);
+            }
+
+    public static void main(String args[]){
+        euro_tl pencere=new euro_tl("Merhaba");
+        pencere.olustur();
+        }
+
+public void actionPerformed(ActionEvent e){
+        String s=e.getActionCommand();
+        
+            if(s.equals("TL'ye ÇEVİR")){
+                    s1=c.getText();
+                   // girilen_para1=Double.valueOf(s1);
+                    cevrilen_para1=(Double.valueOf(s1))*2.3;
+                    String cevrilen_para1_string=Double.toString(cevrilen_para1);
+                    //para12=String.valueOf(cevrilen_para1);
+                    d.setText(cevrilen_para1_string);
+                    el.setText("");
+                }
+
+                 if(s.equals("EURO'ya ÇEVİR")) {
+                   s2=c.getText();
+                   cevrilen_para2=(Double.valueOf(s2))/2.3;
+                    String cevrilen_para2_string=Double.toString(cevrilen_para2);
+                    //para12=String.valueOf(cevrilen_para1);
+                    el.setText(cevrilen_para2_string);
+                    d.setText("");
+                     }
+
+        }
+        public void windowClosing(WindowEvent e){
+            System.exit(0);
+            }
+
+            public void windowOpened(WindowEvent e){}
+                public void windowClosed(WindowEvent e){}
+                    public void windowIconified(WindowEvent e){}
+                        public void windowDeiconified(WindowEvent e){}
+                            public void windowActivated(WindowEvent e){}
+                                    public void windowDeactivated(WindowEvent e){}
+    }
