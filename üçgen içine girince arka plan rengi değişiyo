@@ -1,0 +1,64 @@
+
+
+// Sınav calışması
+import java.awt.*;
+import java.applet.Applet;
+import java.awt.event.*;
+
+public class ucgen extends Applet implements MouseListener,MouseMotionListener
+{
+  Point a;
+	int flag=1;
+	public void init()
+{
+	setBackground(Color.red);
+	
+	addMouseListener(this);
+	addMouseMotionListener(this);
+}
+
+public void paint(Graphics p)
+{
+
+	
+			//p.drawString("wew"+a.x+a.y,10,10);
+	
+	p.setColor(Color.black);
+	p.drawLine(150,150,50,200); // 100 / 50 x+2y=450 2y+x-450=0 dogru denklemleri
+	p.drawLine(50,200,200,250); // 150 / 50 3y-x=550 3y-x-550=0
+	p.drawLine(200,250,150,150); // 50 / 100 2x-y=150 y-2x+150=0
+	
+	if(flag==0)
+		setBackground(Color.yellow);
+		else
+			setBackground(Color.red);
+		p.drawString("LAMA"+a.x+a.y,100,100);
+
+	
+}
+public void mouseExited(MouseEvent e){
+}
+public void mouseEntered(MouseEvent e){
+}
+public void mouseReleased(MouseEvent e){
+}
+public void mousePressed(MouseEvent e){
+}
+public void mouseClicked(MouseEvent e){
+}
+public void mouseDragged(MouseEvent e){
+}
+public void mouseMoved(MouseEvent e){
+	a=e.getPoint();
+	
+	
+	if(a.x+(2*a.y)>450 &&  (3*a.y)-a.x<550 && a.y-(2*a.x)+150>0 )
+		flag=0;
+		else
+			flag=1;
+	
+	
+	repaint();
+}
+}
+
