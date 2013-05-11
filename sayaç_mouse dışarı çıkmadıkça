@@ -1,0 +1,47 @@
+import java.awt.*;
+import java.applet.*;
+import java.awt.event.*;
+public class ornek17 extends Applet implements MouseListener, MouseMotionListener {
+Point a;
+int i=0,x;
+public void init() {
+setBackground(Color.yellow);
+addMouseListener(this);
+addMouseMotionListener(this);
+}
+public void paint(Graphics g) {
+if(x==0)//bayrak kullanımı
+{
+g.drawString(""+i,10,60);
+i+=1;
+}
+else
+g.drawString(""+i,10,60);
+try{
+Thread.sleep(100);
+}
+catch(Exception e){
+}
+repaint();
+}
+public void mouseMoved(MouseEvent e){
+}
+public void mousePressed(MouseEvent e){
+}
+public void mouseDragged(MouseEvent e){
+}
+public void mouseReleased(MouseEvent e){
+}
+public void mouseClicked(MouseEvent e){
+}
+public void mouseEntered(MouseEvent e){
+x=0;//bayrak
+a=e.getPoint();
+repaint();
+}
+public void mouseExited(MouseEvent e){
+x=1;//bayrak
+a=e.getPoint();
+repaint();
+}
+}
