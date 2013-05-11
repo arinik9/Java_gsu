@@ -1,0 +1,114 @@
+//3 dosyayı arda arda yazdım, bunları ayrı ayrı kaydetmen gerek.
+
+
+import java.util.Scanner;
+import java.util.*;
+
+public class main_ex5{
+  
+	public static void main(String args[]){
+		
+		int dizi[] = new int [100]; 
+		int a=0,b=0,deney=0,i;
+		String s_dizi="",str;
+		boolean bayrak=false;
+		asal_mı nesne2=new asal_mı();
+		diziye_asal_yazdırma nesne1=new diziye_asal_yazdırma();
+	System.out.println("2den büyük ÇİFT sayı giriniz ");
+		Scanner bilgi=new Scanner(System.in);
+	
+		do{	
+		 a=bilgi.nextInt();
+		}while(a<=2 || a%2 != 0);// sayının 2den büyük ve çift olma koşulu
+	
+		nesne1.sayi=a/2; // girilen sayının yarısıyla işlem yapıcaz
+		
+/*ÇOK ÖNEMLİ*/	s_dizi=s_dizi+Arrays.toString(nesne1.diziye_atma(dizi)); //Bunsuz olmuo
+			
+	for(i=0;i<a/2;i++){
+		deney=a-dizi[i]; // dizi'yi return'lenip doğru şekilde gelio mu kontrol et!
+		nesne2.sayi=deney;
+		if(nesne2.asalbul() == true){
+			bayrak=true;
+			i=a/2;// for'u bitirmek için
+		}
+	}	
+		if(bayrak==true)
+		System.out.println("Girdiğiniz sayı, Goldbach Varsayımı'nı sağlıyor");
+		
+			if(nesne2.asalbul() == false && i==a/2)
+				System.out.println("Girdiğiniz sayı, Goldbach Varsayımı'nı sağlamıyor (Nası olablir ki?? :/ )");
+	
+		}		
+}
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+public class asal_mı{
+  
+public int sayi;
+public boolean k=true;
+
+public boolean asalbul()
+{
+
+	int a=2,b=1;
+	do{
+			if(sayi%a==0)
+			{
+					b=0;
+			}
+					a++;
+		}
+		while(a<=Math.sqrt(sayi) && b!=0);
+
+		if(b==0)
+			 k=false;
+			//System.out.print("Asal Sayı Değil");
+			else
+				 k=true;
+				//System.out.print("Asal Sayı");
+				
+				return k;
+}
+			
+}
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+public class diziye_asal_yazdırma{
+  
+	public int sayi;
+	public int[] dizi=new int[100]; // []  içine 8 yerine  "sayi" yazmak gerekir ama hata veriyodu en son
+	
+	public int[] diziye_atma(int dizi[]){
+
+	int a=2,b=1,deger,i=1;
+	
+	for(deger=2;deger<sayi;deger++){
+	do{
+			if(deger%a==0)
+			{
+					b=0;
+			}
+					a++;
+		}
+		while(a<=Math.sqrt(deger) && b!=0);
+
+		dizi[0]=2;
+		if(b!=0){	//yani asal ise diziye atıorz
+			dizi[i]=deger;
+			i++;
+		}
+		a=2;
+		b=1;
+	}
+	
+	return dizi;		
+}
+}
