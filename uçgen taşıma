@@ -1,0 +1,91 @@
+//Üçgenin içinde yeşilk oluyo, üçgenin içine bastıgında sürükleyebiliosun
+import java.applet.*;
+import java.awt.*;
+import java.awt.event.*;
+import java.util.*;
+
+
+public class ucgen_tasima extends Applet implements MouseListener,MouseMotionListener
+{
+  int[] x={100,180,20};
+	int[] y={50,150,150};
+	int mx,my,newx,newy,A_B,C_A,B_C,tx,ty;
+	Point u,q,t;
+	Boolean flag1=false,flag2=false;
+	
+	public void init()
+	{
+		addMouseListener(this);
+		addMouseMotionListener(this);		
+	}
+	
+	public void paint(Graphics p)
+	{
+		p.fillPolygon(x,y,3);
+		
+		
+	//repaint();
+	}
+	
+	public void mouseMoved(MouseEvent e){
+		t=e.getPoint();
+		tx=t.x;
+		ty=t.y;
+		
+			A_B=((y[1]-y[0])*(tx-x[1]))-((ty-y[1])*(x[1]-x[0]));
+			B_C=((y[2]-y[1])*(tx-x[2]))-((ty-y[2])*(x[2]-x[1]));
+			C_A=((y[0]-y[2])*(tx-x[0]))-((ty-y[0])*(x[0]-x[2]));   
+			if(A_B<=0 && B_C<=0 && C_A<=0)
+				setBackground(Color.green);
+				else	
+					setBackground(Color.white);
+						
+	}
+	public void mousePressed(MouseEvent e){
+			u=e.getPoint();
+			mx=u.x;
+			my=u.y;
+			
+		//	A köşesiyle B köşeinin dogru denklemi
+			A_B=((y[1]-y[0])*(mx-x[1]))-((my-y[1])*(x[1]-x[0]));
+		//	B köşesiyle C köşeinin dogru denklemi
+			B_C=((y[2]-y[1])*(mx-x[2]))-((my-y[2])*(x[2]-x[1]));
+		//	A köşesiyle C köşesinin dogru denklemi
+			C_A=((y[0]-y[2])*(mx-x[0]))-((my-y[0])*(x[0]-x[2]));   
+			
+			if(A_B<=0 && C_A<=0 && B_C<=0)	
+				flag1=true;
+		
+			repaint();
+	}
+		public void mouseDragged(MouseEvent e){
+				if(flag1==true){
+				q=e.getPoint();
+				newx=q.x;
+				newy=q.y;
+		
+		x[0]+=newx-mx;
+		y[0]+=newy-my;
+		x[1]+=newx-mx;
+		y[1]+=newy-my;
+		x[2]+=newx-mx;
+		y[2]+=newy-my;
+		
+		mx=newx;
+		my=newy;
+
+		repaint();
+	
+		}
+		
+	}
+		public void mouseReleased(MouseEvent e){
+			flag1=false;
+	}
+		public void mouseClicked(MouseEvent e){
+	}	
+		public void mouseEntered(MouseEvent e){
+	}
+		public void mouseExited(MouseEvent e){
+	}
+}
