@@ -1,0 +1,26 @@
+//hocanın sınav öncesi verdiği kagıttan ex 2, saate bakıosun, saat ile dk çarpımı saniyeye eşit. 35 dk sonra yine aynı sonuç. bunu veren java programı
+
+public class saat
+{
+  public static void main(String args[])
+	{
+		int dk,sa,saniye=0,yenidk,yenisa;
+		for(dk=0;dk<=59;dk++)
+		{
+			for(sa=1;sa<=12;sa++)
+			{
+				if(dk*sa>=0 && dk*sa<=59)
+				{
+					saniye=dk*sa;
+				yenidk=(dk+35)%60;
+				yenisa=(sa+((dk+35)/60));
+				if(yenisa*yenidk==saniye)
+						System.out.print("Saat:"+sa+"Dakika:"+dk+"Saniye:"+saniye);
+				}
+					
+			}
+		}
+		
+		
+	}
+}
