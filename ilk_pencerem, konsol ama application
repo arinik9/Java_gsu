@@ -1,0 +1,32 @@
+import java.awt.*;
+import java.awt.event.*;
+
+public class ilk_pencerem_application implements WindowListener
+{
+    public static void main(String args[])
+    {
+        ilk_pencerem_application p=new ilk_pencerem_application();
+        Frame pencere=new Frame("ILK PENCEREM");
+        pencere.setLocation(0,0);
+        pencere.setBackground(Color.red);
+        pencere.setSize(300,100);
+        Rectangle r=new Rectangle(500,500);
+        pencere.setMaximizedBounds(r);
+        pencere.addWindowListener(p);
+        pencere.setVisible(true);
+        }
+
+        public void windowClosing(WindowEvent e)
+        {
+            System.exit(0);
+            }
+
+            public void windowOpened(WindowEvent e){}
+                public void windowClosed(WindowEvent e){}
+                    public void windowIconified(WindowEvent e){}
+                        public void windowDeiconified(WindowEvent e){}
+                            public void windowActivated(WindowEvent e){}
+                                    public void windowDeactivated(WindowEvent e){}
+
+
+    }
