@@ -26,22 +26,22 @@ public class quiz1bb extends Applet implements MouseListener, MouseMotionListene
 		{
 			switch(z[i])
 			{
-				case 0: 	x[i]=x[i]+k*10;							//x[] = {300,290,280,270,260,250,240,230,220,210,200};
-							if(k==1)	if(x[i]==400) z[i]=1;
-							if(k==-1) 	if(x[i]==100) z[i]=3;
-							break;
-				case 1: 	y[i]=y[i]+k*10;							//y[] = {150,150,150,150,150,150,150,150,150,150,150};
-							if(k==1)	if(y[i]==200) z[i]=2;
-							if(k==-1)	if(y[i]==150) z[i]=0;
-							break;
-				case 2: 	x[i]=x[i]-k*10;
-							if(k==1)	if(x[i]==100) z[i]=3;
-							if(k==-1)	if(x[i]==400) z[i]=1;
-							break;
-				case 3: 	y[i]=y[i]-k*10;
-							if(k==1)	if(y[i]==150) z[i]=0;
-							if(k==-1)	if(y[i]==200) z[i]=2;
-							break;
+			case 0: x[i]=x[i]+k*10;	         //x[] = {300,290,280,270,260,250,240,230,220,210,200};
+						if(k==1)	if(x[i]==400) z[i]=1;
+						if(k==-1) 	if(x[i]==100) z[i]=3;
+						break;
+			case 1: y[i]=y[i]+k*10;          //y[] = {150,150,150,150,150,150,150,150,150,150,150};
+						if(k==1)	if(y[i]==200) z[i]=2;
+						if(k==-1)	if(y[i]==150) z[i]=0;
+						break;
+			case 2:	x[i]=x[i]-k*10;
+						if(k==1)	if(x[i]==100) z[i]=3;
+						if(k==-1)	if(x[i]==400) z[i]=1;
+						break;
+			case 3: y[i]=y[i]-k*10;
+						if(k==1)	if(y[i]==150) z[i]=0;
+						if(k==-1)	if(y[i]==200) z[i]=2;
+						break;
 			}
 		}
 		for (i=0;i<10;i++)
