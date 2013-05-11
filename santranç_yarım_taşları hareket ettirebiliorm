@@ -1,0 +1,160 @@
+import java.awt.*;
+import java.applet.Applet;
+import java.awt.event.*;
+
+public class santranc extends Applet implements KeyListener{
+ int i,j,x=90,y=15,w=95,q=40,hareket_y=175,hareket_x=250,sayac=0,l=1,m=1;
+ String a[][]=new String[8][8],tempString[]=new String[99999];
+ int b[][]=new int[8][8],tempInt[]=new int[99999];
+ int tempCoor_x[]=new int[99999],tempCoor_y[]=new int[99999],ch_x[]=new int[99999],ch_y[]=new int[99999];
+ boolean flag_tas_oynatma=false;
+ //0: Boş
+ //1: Mavi
+ //2: Kırmızı
+ public void init(){
+   	ch_x[l-1]=(hareket_y-15)/40;
+		ch_y[l-1]=(hareket_x-90)/40;
+ 		tempCoor_x[m-1]=hareket_x+10;
+ 		tempCoor_y[m-1]=hareket_y+30;
+ 		tempString[l-1]="";
+ 		tempInt[l-1]=b[(hareket_y-15)/40][(hareket_x-90)/40];// naptıgımı bilemedim burda
+ 	addKeyListener(this);
+  a[0][0]="K";  a[0][1]="A";  a[0][2]="F";  a[0][3]="V";
+   a[0][4]="Ş";  a[0][5]="F";  a[0][6]="A";  a[0][7]="K";
+    a[7][0]="K";  a[7][1]="A";  a[7][2]="F";  a[7][3]="Ş";
+     a[7][4]="V";  a[7][5]="F";  a[7][6]="A";  a[7][7]="K";
+ for(i=0;i<2;i++){
+ for(j=0;j<8;j++){// ilk ve 2. satırı mavi renkli taşlarla doldurduk
+ b[i][j]=1;
+ }
+ }
+ 
+ for(i=6;i<8;i++){ 
+ for(j=0;j<8;j++){ //son satırı kırmızı renkli taşlarla doldurduk
+ b[i][j]=2;
+ }
+ }
+   
+  for(i=1;i<7;i++){//ilk ve son satırı almyorz çünkü yerleştirdk kale,at falan..
+   if(i==1){
+    for(j=0;j<8;j++){
+     a[i][j]="P";
+     b[i][j]=1;
+    }
+   }
+    else if(i==6){
+     for(j=0;j<8;j++){
+      a[i][j]="P";
+      b[i][j]=2;
+     }
+    }
+    
+     else{
+       for(j=0;j<8;j++){
+       a[i][j]="";
+       b[i][j]=0;
+       }
+      } 
+  } 
+   
+ }// init in bitişi
+ public void paint(Graphics g){
+ 	g.drawString(""+sayac,30,30);
+ 	g.drawString("şu an:"+a[(hareket_y-15)/40][(hareket_x-90)/40],30,90);
+ 	g.drawString("har.etcek harf: "+a[ch_x[l-1]][ch_y[l-1]],3,60);
+ 	g.drawString("har. etcek harf-koor:"+ch_x[l-1]+","+ch_y[l-1],2,120);
+ 	g.drawString(hareket_x+","+hareket_y,30,160);
+ 	g.drawString(tempCoor_x[m-1]+","+tempCoor_y[m-1],30,140);
+ 		g.drawString("l: "+l+"m: "+m,30,180);
+ 	
+  g.drawRect(x,y,320,320); 
+  for(i=0;i<8;i++){ //for başı--- satrancı oynadıgımız tahtayı oluşturduk
+   if(i%2==1) x=x-40;
+     else x=x+40; 
+   for(j=0;j<8;j=j+2){
+    g.fillRect(x+40*j,y+i*40,40,40);  
+    }
+     } //for sonu 
+    
+  Font tt=new Font("Courier",Font.PLAIN,30);
+			g.setFont(tt);  
+    
+     if(hareket_x>=90 && hareket_x<=370 && hareket_y>=15 && hareket_y<=295){ //sarı karenini büyük karenin dışına çıkmasını engelliorm
+       g.setColor(Color.yellow);
+       g.fillRect(hareket_x,hareket_y,40,40);
+       if(b[(hareket_y-15)/40][(hareket_x-90)/40]==1) g.setColor(Color.blue);
+				else if(b[(hareket_y-15)/40][(hareket_x-90)/40]==2) g.setColor(Color.red);
+       g.drawString(""+a[(hareket_y-15)/40][(hareket_x-90)/40],hareket_x+10,hareket_y+30);
+       }
+       
+       if(flag_tas_oynatma && sayac%3==2 ){// true ise yani
+       	tempString[l-1]=a[ch_x[l-1]][ch_y[l-1]]; // oynayacagın taşın harfi
+       	tempInt[l-1]=b[ch_x[l-1]][ch_y[l-1]];
+       	a[ch_x[l-1]][ch_y[l-1]]="";//oynattıgım taşın yerindeki değişiklikler, taşı oynattıgım için o yeri boş bırakmak lazım
+       	b[ch_x[l-1]][ch_y[l-1]]=-1;// burası da renk ile ilgili bişey, -1 dogru olur sanırım burda
+       	 a[tempCoor_x[l-1]][tempCoor_y[l-1]]=tempString[l-1];
+       b[tempCoor_x[l-1]][tempCoor_y[l-1]]=tempInt[l-1];
+       	flag_tas_oynatma=false;
+       }
+       
+      
+     /*
+     for(i=1;i<tempString.length;i++){
+       		if(tempInt[i-1]==1) g.setColor(Color.blue);
+       			else if(tempInt[i-1]==2) g.setColor(Color.red);
+       	g.drawString(""+tempString[i-1],tempCoor_x[i-1],tempCoor_y[i-1]);
+     }*/
+    
+       	if(!flag_tas_oynatma && sayac%3==2){
+       	sayac++;
+       }
+    
+    
+    
+      for(i=0;i<8;i++){
+        for(j=0;j<8;j++){
+			if(b[i][j]==1) g.setColor(Color.blue);
+				else if(b[i][j]==2) g.setColor(Color.red);
+         g.drawString(""+a[i][j],w+5+j*40,q+5+i*40); //w=95,q=40---q'nun nie 15 veya 20  değil de 40 oldugunu deneyerek buldum
+        }
+       }
+       
+      
+   } //paint sonu
+   
+   	public void keyPressed(KeyEvent e){
+	
+   	int tus=e.getKeyCode();
+	switch(tus)
+	{
+		case(KeyEvent.VK_UP): if(hareket_y>15) hareket_y=hareket_y-40; break;
+		case(KeyEvent.VK_DOWN): if(hareket_y<295) hareket_y=hareket_y+40; break;
+		case(KeyEvent.VK_LEFT): if(hareket_x>90) hareket_x=hareket_x-40; break;
+		case(KeyEvent.VK_RIGHT): if(hareket_x<370) hareket_x=hareket_x+40; break;
+case(KeyEvent.VK_SPACE):   if(!a[(hareket_y-15)/40][(hareket_x-90)/40].equals("") && sayac%3 == 0){
+	flag_tas_oynatma=true;
+		//tempString="";
+       		//tempInt=-1;	
+		ch_x[l]=(hareket_y-15)/40;// oynayacagın taşın koordinatları
+		ch_y[l]=(hareket_x-90)/40;
+		l++;
+	}
+		
+		if(a[(hareket_y-15)/40][(hareket_x-90)/40].equals("") && sayac%3 == 0)
+			sayac=sayac;
+			else if(sayac%3 == 0 || sayac%3 == 1 || sayac%3 == 2)
+			sayac++;
+		
+		if(sayac%3 == 2){ tempCoor_x[m]=(hareket_y-15)/40;	tempCoor_y[m]=(hareket_x-90)/40;   m++;}   break;
+	} 
+		repaint();
+    }
+
+	public void keyReleased(KeyEvent e){
+	}
+	public void keyTyped(KeyEvent e){
+	}
+}
+
+
+		
