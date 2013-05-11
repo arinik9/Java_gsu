@@ -1,0 +1,63 @@
+import java.awt.*;
+import java.applet.*;
+
+public class top_bayır_asagi extends Applet {
+  
+		int i=0,y=0,bilye_x=42,bilye_y=70,t=0,sayac=0;
+	double teta=3.14/2;
+	boolean flag1=true,flag2=false;
+	
+	public void init() {
+		setBackground(Color.yellow);
+	}
+
+	public void paint(Graphics g) {
+		
+		g.drawOval(bilye_x,bilye_y,40,40);
+		g.drawLine(18,91,210,185);			// bu sayıları elde edebilmek için deneye deneye buldum.
+		g.drawLine(210,185,500,185);		//ilk başta, x, 2x,kök5*x üçgeni düşünmüştüm(yatayda 2x), sonra biraz modifie ettim
+	
+		
+		if(flag1==true){
+			sayac++;
+		/*	if(sayac%2==0)     böyle oldugunda, ilk başta çok yavaş kalıyo, pek gerçekçi olmuyo
+					t++;*/
+			
+				if(t!=1 && t!=2 && (sayac%2)==0)
+					t++;
+					else
+						t++;
+	/*	bilye_x=bilye_x+(int)(t*5*2/Math.sqrt(5));
+		bilye_y=bilye_y+(int)(t*5*1/Math.sqrt(5));*/
+			bilye_x=bilye_x+(int)(5*2/Math.sqrt(5));
+		bilye_y=bilye_y+(int)(5*1/Math.sqrt(5));
+		}
+	
+		if(flag2==true){
+			//	bilye_x=bilye_x+(int)(t*5*2/Math.sqrt(5));
+				bilye_x=bilye_x+(int)(5*2/Math.sqrt(5));
+		}
+		
+		if(210-bilye_x<17 && 210-bilye_x<23)// 210'u deneyerek buldum, 220 yapsam daha aşağıda durucaktı mesela
+		{	flag1=false;
+			flag2=true;
+		}
+		
+		if(bilye_x<470 && bilye_x>430)  // topu durdurmak için, keyfi olarak, istersen durdurmayabilirsin
+			flag2=false;
+		
+		if(flag1==true || flag2==true)
+		teta=teta-(3.14*3/80);				//saatteki saniye için bu ayar iidir-aşagı yukarı: 	teta=teta-(3.14/30);  sleep=1000
+		i=(int)(20*Math.cos(teta));
+	y=20-(int)(20*Math.sin(teta))
+	//g.drawLine(bilye_x+20,bilye_y+20,bilye_x+20+i,bilye_y+y);  //bilye_x+20 yazınca çubuk biraz ilerde kalmış oluoy, 2-3 pixel kadar
+		g.drawLine(bilye_x+18,bilye_y+20,bilye_x+18+i,bilye_y+y);
+				
+		try{
+			Thread.sleep(1000/t); // böyle yapınca, top git gide hızlanmış olcak
+		}
+		catch(Exception e){}
+		
+		repaint();				
+	}
+}
