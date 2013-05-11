@@ -1,0 +1,120 @@
+
+import java.awt.*;
+import java.applet.Applet;
+import java.awt.event.*;
+
+public class quiz2_nejat extends Applet implements KeyListener {
+  int x_rect=240,y_rect=250, mermi_x, mermi_y;
+	int x1=350,y1=50;
+	boolean flag_ates=false,flag2=true,flag1=false,oyun_sonu=false;
+
+	public void init() {
+		setBackground(Color.yellow);
+             addKeyListener(this);
+            mermi_x=x_rect+10;
+            mermi_y=y_rect-10;
+
+	}
+
+	public void paint(Graphics g) {
+			//g.drawLine(50,50,350,50);
+		/*	g.drawLine(50,50,50,150);
+			g.drawLine(350,50,350,150);
+			g.drawLine(350,150,50,50);
+			g.drawLine(50,150,350,50);*/
+
+			//hareket edicek cismi yaratıoruz
+			if(oyun_sonu==false){
+			g.fillRect(x1,y1,20,20);
+			}
+			
+			if(oyun_sonu)
+			g.drawString("Tebrikler Kazandınız!!",220,200);
+			
+					if(x1==50 && y1==150)
+					flag2=false;
+				
+					if(x1==50 && y1==50)
+					flag1=true;
+					
+					if(x1==350 && y1==150)
+					flag1=false;
+					
+					if(x1==350 && y1==50)
+					flag2=true;
+			//köşegensel gidebilmesi için x ve y:
+			if(x1<=350 && x1>50 && y1>=50 && y1<150 && flag2==true){		
+				x1=x1-12;
+				y1=y1+4;
+			}
+			
+			
+			if(x1==50 && y1>50 && y1<=150 && flag2==false){	
+				y1=y1-10;
+				}
+
+				if(x1<350 && x1>=50 && y1>=50 && y1<150 && flag1==true){
+					x1=x1+12;
+					y1=y1+4;	
+				}
+
+				if(x1==350 && y1<=150 && y1>50 && flag1==false){
+						y1=y1-10;
+				}
+
+		if(mermi_x>x1-10 && mermi_x<x1+20 && mermi_y>y1 && mermi_y<y1+20){// mermi hedefi vurursa
+			oyun_sonu=true;
+			
+			}
+
+
+		g.drawLine(0,270,500,270);
+		g.fillRect(x_rect,250,20,20);
+		
+			
+
+		if(flag_ates==true){
+			if(mermi_y>=0&&oyun_sonu==false)
+			g.fillOval(mermi_x,mermi_y,10,10);
+			
+			mermi_y=mermi_y-10;
+			if(mermi_y<0){
+				flag_ates=false;
+			}
+		}
+
+
+		 try{
+Thread.sleep(100);
+}
+catch(Exception e){};
+  repaint();
+	}
+
+	public void keyTyped(KeyEvent e){}
+
+public void keyPressed(KeyEvent e){
+int tus=e.getKeyCode();
+switch(tus){
+
+case(KeyEvent.VK_UP):  if(flag_ates==false&&oyun_sonu==false){flag_ates=true;
+				mermi_x=x_rect+10;
+				 mermi_y=y_rect-10;
+}
+break;
+
+case(KeyEvent.VK_LEFT): if(x_rect>0&&oyun_sonu==false) x_rect=x_rect-10;
+break;
+
+case(KeyEvent.VK_RIGHT): if(x_rect<480&&oyun_sonu==false) x_rect=x_rect+10;
+break;
+}
+repaint();
+}
+
+public void keyReleased(KeyEvent e){
+}
+
+
+
+}
