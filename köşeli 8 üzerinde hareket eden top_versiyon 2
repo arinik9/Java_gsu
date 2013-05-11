@@ -1,0 +1,32 @@
+import java.applet.Applet;
+import java.awt.*;
+import java.applet.*;
+
+public class baranınki extends Applet {
+int x, y;
+int flag;
+public void init() {
+x = 21; y = 21;
+flag = 0;
+}
+
+public void paint(Graphics g) {
+g.drawOval(x - 10, y - 10, 20, 20);
+if(flag == 0){ x++; if(x == 120) flag++;}
+if(flag == 1){ y++; if(y == 120) flag++;}
+if(flag == 2){ x--; if(x == 21) flag++;}
+if(flag == 3){ y++; if(y == 220) flag++;}
+if(flag == 4){ x++; if(x == 120) flag++;}
+if(flag == 5){ y--; if(y == 120) flag++;}
+if(flag == 6){ x--; if(x == 21) flag++;}
+if(flag == 7){ y--; if(y == 21) flag=0;}
+g.drawLine(21, 21, 120, 21);
+g.drawLine(120, 21, 120, 120);
+g.drawLine(120, 120, 21, 120);
+g.drawLine(21, 120, 21, 220);
+g.drawLine(21, 220, 120, 220);
+g.drawLine(120, 220, 120, 21);
+g.drawLine(21, 21, 21, 120);
+try{Thread.sleep(100);}catch(Exception e){}
+repaint();
+}}
