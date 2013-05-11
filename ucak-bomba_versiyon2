@@ -1,0 +1,84 @@
+import java.awt.*;
+import java.applet.Applet;
+import java.awt.event.*;
+
+public class ucakbomba extends Applet implements KeyListener {
+
+//repaint()'in yerini bilemedim. Dogru mu?
+Double c;
+//Double c=new Double(210*Math.random());
+        int a=0,süre=0,bombay=80,bombax=0;
+        int bayrak2=1,bayrak=2;
+    int b;
+    //    int b=70+c.intValue();
+  	
+public void init() {
+addKeyListener(this);
+}
+
+public void paint(Graphics g) {
+
+g.fillRect(a,50,90,30);
+//if(bayrak==0)
+//	bayrak=2;
+	if(bayrak2==1){
+a=a+10;
+c=new Double(210*Math.random());
+b=70+c.intValue();
+	}
+if(a==500)
+a=0;
+	if(bayrak==1){
+		süre=süre+1;
+	bombax=a+60; 
+	g.setColor(Color.red);
+	bombax=bombax+süre*10;
+	bombay=bombay+5*süre*süre;
+	g.fillOval(bombax,bombay,15,15);
+	
+		if(bombax>b-15 && bombax<b+49 && bombay>200 && bombay<280){
+				bayrak2=-1;
+					g.fillOval(b+10,210,15,15); // top karenin neresindeyse orda gözüksün istiyorum son kez. Ama olmuyo?
+			}	
+				
+		
+     }
+     	if(bombay>=450){  // bombay>=350  yapınca topun aşağı inme seviyesinde bi değişiklik olmuyo
+			   süre=0;
+			   bombay=80;
+			   bombax=a;
+			  bayrak=2;
+			  // bayrak=0;
+			}			   
+
+
+g.setColor(Color.yellow);
+g.fillRect(b,200,50,50);
+g.setColor(Color.green);
+g.drawLine(0,250,500,250);
+
+try{
+Thread.sleep(100);
+}
+catch(Exception e){};
+repaint();
+}
+
+public void keyPressed(KeyEvent e){
+
+int tus=e.getKeyCode();
+switch(tus){
+case(KeyEvent.VK_DOWN): if(bayrak2==1)bayrak=1;
+break;
+}
+
+repaint();
+}
+
+public void keyReleased(KeyEvent e){
+}
+
+public void keyTyped(KeyEvent e){
+}
+
+}
