@@ -1,0 +1,63 @@
+/**
+ * @(#)nejat.java
+ *
+ * nejat Applet application
+ *
+ * @author
+ * @version 1.00 2013/3/25
+ */
+ 
+import java.awt.*;
+import java.applet.Applet;
+//temel GUI elemanları
+public class Gui extends Applet {
+ 
+ public void init() {
+ 
+ setBackground(Color.yellow);
+ 
+ Label a=new Label("Bir etiket:");
+ add(a);
+ 
+ TextField b=new TextField(20);
+ add(b);
+ b.setText("Burayı sayı gir!");
+ 
+ TextField sifre=new TextField(6);
+ add(sifre);
+ sifre.setEchoCharacter('*');
+ sifre.setText("Bir");
+ 
+ Choice secimlistesi=new Choice();
+ add(secimlistesi);
+ secimlistesi.addItem("Seçenek 1");
+ secimlistesi.addItem("Seçenek 2");
+ secimlistesi.addItem("Seçenek 3");
+ secimlistesi.addItem("Seçenek 4");
+ secimlistesi.addItem("Seçenek 5");
+ secimlistesi.addItem("Seçenek 6");
+ 
+ Checkbox d=new Checkbox("Onay");
+ add(d);
+ d.setState(true);
+ 
+ CheckboxGroup radyodugmesi=new CheckboxGroup();
+ add(new Checkbox("Evet",radyodugmesi,true));
+ add(new Checkbox("Hayır",radyodugmesi,false));
+ 
+ TextArea s=new TextArea(10,20);
+ add(s);
+ s.setText("Buraya yazı yazılabilir");
+ 
+ Button k=new Button("Düğme");
+ add(k);
+ }
+ public void paint(Graphics p) {
+  Font tt=new Font("Arial",Font.PLAIN,17);
+  p.setFont(tt);
+  //p.setColor(Color.cyan);
+  
+  p.drawString("Bu bir deneme GUI programıdır", 200, 280 );
+  
+ }
+}
