@@ -1,0 +1,183 @@
+import java.awt.*;
+import java.applet.Applet;
+//GridBagLayout üzerine örnek bir program
+
+public class y37 extends Applet {
+
+GridBagLayout a=new GridBagLayout();
+GridBagConstraints b=new GridBagConstraints();
+
+TextField t;
+Button b0;
+Button b1;
+Button b2;
+Button b3;
+Button b4;
+Button b5;
+Button b6;
+Button b7;
+Button b8;
+Button b9;
+Button b_nokta;
+Button b_esittir;
+Button b_arti;
+Button b_eksi;
+Button b_carpma;
+Button b_bolme;
+Button b_silme;
+
+public void init() {
+this.setLayout(a);
+b.fill=GridBagConstraints.BOTH;
+b.insets=new Insets(3,3,3,3);
+
+b.gridx=0;  // en üstteki sayı gösteren textfield
+b.gridy=0;
+b.gridwidth=4;
+b.gridheight=1;
+t=new TextField(10);
+a.setConstraints(t,b);
+add(t);
+
+b.gridx=0;
+b.gridy=5;
+b.gridwidth=2;
+b.gridheight=1;
+b0=new Button("0");
+a.setConstraints(b0,b);
+add(b0);
+
+b.gridx=0;
+b.gridy=4;
+b.gridwidth=1;
+b.gridheight=1;
+b1=new Button("1");
+a.setConstraints(b1,b);
+add(b1);
+
+b.gridx=1;
+b.gridy=4;
+b.gridwidth=1;
+b.gridheight=1;
+b2=new Button("2");
+a.setConstraints(b2,b);
+add(b2);
+
+b.gridx=2;
+b.gridy=4;
+b.gridwidth=1;
+b.gridheight=1;
+b3=new Button("3");
+a.setConstraints(b3,b);
+add(b3);
+
+b.gridx=0;
+b.gridy=3;
+b.gridwidth=1;
+b.gridheight=1;
+b4=new Button("4");
+a.setConstraints(b4,b);
+add(b4);
+
+b.gridx=1;
+b.gridy=3;
+b.gridwidth=1;
+b.gridheight=1;
+b5=new Button("5");
+a.setConstraints(b5,b);
+add(b5);
+
+b.gridx=2;
+b.gridy=3;
+b.gridwidth=1;
+b.gridheight=1;
+b6=new Button("6");
+a.setConstraints(b6,b);
+add(b6);
+
+b.gridx=0;
+b.gridy=2;
+b.gridwidth=1;
+b.gridheight=1;
+b7=new Button("7");
+a.setConstraints(b7,b);
+add(b7);
+
+b.gridx=1;
+b.gridy=2;
+b.gridwidth=1;
+b.gridheight=1;
+b8=new Button("8");
+a.setConstraints(b8,b);
+add(b8);
+
+b.gridx=2;
+b.gridy=2;
+b.gridwidth=1;
+b.gridheight=1;
+b9=new Button("9");
+a.setConstraints(b9,b);
+add(b9);
+
+b.gridx=0;
+b.gridy=1;
+b.gridwidth=1;
+b.gridheight=1;
+b_silme=new Button("silme");
+a.setConstraints(b_silme,b);
+add(b_silme);
+
+b.gridx=2;
+b.gridy=5;
+b.gridwidth=1;
+b.gridheight=1;
+b_nokta=new Button("nokta");
+a.setConstraints(b_nokta,b);
+add(b_nokta);
+
+b.gridx=3;
+b.gridy=4;
+b.gridwidth=1;
+b.gridheight=2;
+b_esittir=new Button("eşittir");
+a.setConstraints(b_esittir,b);
+add(b_esittir);
+
+b.gridx=3;
+b.gridy=2;
+b.gridwidth=1;
+b.gridheight=2;
+b_arti=new Button("artı");
+a.setConstraints(b_arti,b);
+add(b_arti);
+
+b.gridx=3;
+b.gridy=1;
+b.gridwidth=1;
+b.gridheight=1;
+b_eksi=new Button("eksi");
+a.setConstraints(b_eksi,b);
+add(b_eksi);
+
+b.gridx=2;
+b.gridy=1;
+b.gridwidth=1;
+b.gridheight=1;
+b_carpma=new Button("çarpma");
+a.setConstraints(b_carpma,b);
+add(b_carpma);
+
+b.gridx=1;
+b.gridy=1;
+b.gridwidth=1;
+b.gridheight=1;
+b_bolme=new Button("bölme");
+a.setConstraints(b_bolme,b);
+add(b_bolme);
+
+
+}
+
+public void paint(Graphics p) {
+}
+}
