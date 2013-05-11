@@ -1,0 +1,75 @@
+import java.awt.*;
+import java.applet.Applet;
+import java.awt.event.*;
+
+public class sınav_oncesi_deneme extends Applet implements MouseListener,MouseMotionListener
+{
+
+  double a=300*Math.random();
+	double b=500*Math.random();
+	int y=(int)a;
+	int x=(int)b;
+	int x1,y1;
+	Point u;
+	Boolean flag1=false;
+	
+	public void init()
+	{
+		addMouseListener(this);
+		addMouseMotionListener(this);
+	}
+	
+	public void paint(Graphics p)
+	{
+		p.fillOval(x,y,10,10);
+		
+		
+		
+		int uzaklık=(int)Math.sqrt((u.x-x)*(u.x-x)+(u.y-y)*(u.y-y));
+		x1=((u.x-x)*10+x*uzaklık)/uzaklık;
+		y1=((u.y-y)*10+y*uzaklık)/uzaklık;
+			if(uzaklık>10)
+			{x=x1;
+		y=y1;
+			}
+		
+		
+		try{
+			Thread.sleep(100);
+		}
+		catch(Exception e){
+		}
+		
+			if(flag1==true)
+					setBackground(Color.white);
+		if(uzaklık>10)
+		repaint();
+		else
+			setBackground(Color.red);
+	
+			
+		
+	}
+	
+	public void mouseMoved(MouseEvent e){
+		u=e.getPoint();
+		flag1=true;
+		
+	//	if(uzaklık>10)
+			repaint();
+		
+		
+	}
+	public void mousePressed(MouseEvent e){
+	}
+		public void mouseDragged(MouseEvent e){
+	}
+		public void mouseReleased(MouseEvent e){
+	}
+		public void mouseClicked(MouseEvent e){
+	}	
+		public void mouseEntered(MouseEvent e){
+	}
+		public void mouseExited(MouseEvent e){
+	}
+}
