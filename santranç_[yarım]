@@ -57,9 +57,9 @@ public class santranc extends Applet implements KeyListener{
       } 
   } 
   	
-  	for(i=0;i<20;i++)
+  	for(i=0;i<20;i++)  // bunun sebebi, oyunun başında sağda ve solda boş olan yerlerde null yazıodu aşagıdan yukarı. "" yazdırdım.
   		maviKaybedilenTas[i]="";
-  			for(i=0;i<20;i++)
+  			for(i=0;i<20;i++) // bunun sebebi, oyunun başında sağda ve solda boş olan yerlerde null yazıodu aşagıdan yukarı.
   				kırmızıKaybedilenTas[i]="";
    
  }// init in bitişi
