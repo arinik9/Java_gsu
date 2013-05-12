@@ -3,8 +3,8 @@ import java.applet.Applet;
 import java.awt.event.*;
 
 public class santranc extends Applet implements KeyListener{
- int i,j,x=90,y=15,w=95,q=40,hareket_y=175,hareket_x=250,sayac=0,l=1,m=1;
- String a[][]=new String[8][8],tempString[]=new String[99999];
+ int i,j,x=90,y=15,w=95,q=40,hareket_y=175,hareket_x=250,sayac=0,l=1,m=1,z=0,d=0,za=0,i_yan_satır=0;
+ String a[][]=new String[8][8],tempString[]=new String[99999],maviKaybedilenTas[]=new String[20],kırmızıKaybedilenTas[]=new String[20];
  int b[][]=new int[8][8],tempInt[]=new int[99999];
  int tempCoor_x[]=new int[99999],tempCoor_y[]=new int[99999],ch_x[]=new int[99999],ch_y[]=new int[99999];
  boolean flag_tas_oynatma=false;
@@ -12,7 +12,7 @@ public class santranc extends Applet implements KeyListener{
  //1: Mavi
  //2: Kırmızı
  public void init(){
-   	ch_x[l-1]=(hareket_y-15)/40;
+ 		ch_x[l-1]=(hareket_y-15)/40;
 		ch_y[l-1]=(hareket_x-90)/40;
  		tempCoor_x[m-1]=hareket_x+10;
  		tempCoor_y[m-1]=hareket_y+30;
@@ -56,6 +56,11 @@ public class santranc extends Applet implements KeyListener{
        }
       } 
   } 
+  	
+  	for(i=0;i<20;i++)
+  		maviKaybedilenTas[i]="";
+  			for(i=0;i<20;i++)
+  				kırmızıKaybedilenTas[i]="";
    
  }// init in bitişi
  public void paint(Graphics g){
@@ -87,16 +92,46 @@ public class santranc extends Applet implements KeyListener{
        g.drawString(""+a[(hareket_y-15)/40][(hareket_x-90)/40],hareket_x+10,hareket_y+30);
        }
        
-       if(flag_tas_oynatma && sayac%3==2 ){// true ise yani
-       	tempString[l-1]=a[ch_x[l-1]][ch_y[l-1]]; // oynayacagın taşın harfi
+    if(flag_tas_oynatma && sayac%3==2 ){ // true ise yani
+      if(b[tempCoor_x[l-1]][tempCoor_y[l-1]]!=b[ch_x[l-1]][ch_y[l-1]]){
+      	    tempString[l-1]=a[ch_x[l-1]][ch_y[l-1]]; // oynayacagın taşın harfi
        	tempInt[l-1]=b[ch_x[l-1]][ch_y[l-1]];
-       	a[ch_x[l-1]][ch_y[l-1]]="";//oynattıgım taşın yerindeki değişiklikler, taşı oynattıgım için o yeri boş bırakmak lazım
-       	b[ch_x[l-1]][ch_y[l-1]]=-1;// burası da renk ile ilgili bişey, -1 dogru olur sanırım burda
+       	if(b[tempCoor_x[l-1]][tempCoor_y[l-1]]==1){ // kaybedilen taşlar, oyun tahtasının yanında dursun, oyuncular görebilsin diye 
+       			maviKaybedilenTas[z]=a[tempCoor_x[l-1]][tempCoor_y[l-1]];
+       			z++;
+       			}
+       		else if(b[tempCoor_x[l-1]][tempCoor_y[l-1]]==2){
+       			 	kırmızıKaybedilenTas[d]=a[tempCoor_x[l-1]][tempCoor_y[l-1]];
+       			 	d++;
+       			 	}
        	 a[tempCoor_x[l-1]][tempCoor_y[l-1]]=tempString[l-1];
        b[tempCoor_x[l-1]][tempCoor_y[l-1]]=tempInt[l-1];
        	flag_tas_oynatma=false;
-       }
+       	a[ch_x[l-1]][ch_y[l-1]]="";
+       	b[ch_x[l-1]][ch_y[l-1]]=0;
+      }
+       else if(b[tempCoor_x[l-1]][tempCoor_y[l-1]]==b[ch_x[l-1]][ch_y[l-1]]){
+       			sayac=sayac-2;
+       			l--;
+       			m--;
+       		}
+    }
        
+  
+     
+     for(i=0;i<maviKaybedilenTas.length;i++){
+     if(i<8){  za=0;   i_yan_satır=i;}
+     else if(i>=8){  za=1;  i_yan_satır=i%8;}
+    	 g.setColor(Color.blue);
+     	 g.drawString(""+maviKaybedilenTas[i],10+za*40,40+40* i_yan_satır);
+     }
+     
+     for(i=0;i<kırmızıKaybedilenTas.length;i++){
+     	if(i<8){ 	za=0;   i_yan_satır=i;}
+     	else if(i>=8){  za=1;  i_yan_satır=i%8;}
+     	 g.setColor(Color.red);
+     	 g.drawString(""+kırmızıKaybedilenTas[i],420+za*40,40+40* i_yan_satır);
+     }
       
      /*
      for(i=1;i<tempString.length;i++){
