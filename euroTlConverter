@@ -1,0 +1,191 @@
+/**
+ * @(#)euroTlConverter.java
+ *
+ *
+ * @author Nejat ARINIK
+ * @version 1.00 2014/9/16
+ */
+
+import java.awt.*;
+import java.awt.event.*;
+import java.net.*;
+import java.io.*;
+
+public class euroTlConverter implements WindowListener, ActionListener
+{
+	Frame frame;
+	Panel panel;
+	Panel controlPanel;
+	Button button1,button2;
+	Label label1,label2, labelEuro, labelDolar;
+	TextField field1,field2,field3;
+	String s1,s2;
+	double girilen_para1,cevrilen_para1,girilen_para2,cevrilen_para2;
+	String cevrilen_para2_string,cevrilen_para1_string;
+	static java.util.List<String> values = new java.util.ArrayList<String>();
+	static String[] parts = null;
+	
+	public euroTlConverter(String title){
+		prepareGUI();
+	}
+	
+	private void prepareGUI(){
+      frame = new Frame("Euro - TL Converter");
+      frame.setSize(440,500);
+      frame.setLocation(200,50);
+      frame.setLayout(new GridLayout(3, 1));
+      frame.addWindowListener(new WindowAdapter() {
+         public void windowClosing(WindowEvent windowEvent){
+            System.exit(0);
+         }        
+      }); 
+      	
+      field1= new TextField(20);
+	  field2= new TextField(30);
+	  button1=new Button("TL'ye ÇEVİR");
+	  button2=new Button("EURO'ya ÇEVİR");
+	  label1=new Label("");
+	  label2=new Label("Tutar giriniz:");
+	  labelEuro=new Label("1 Euro (Alış): "+values.get(0)+", 1 Euro (Satış): "+values.get(1), Label.CENTER);
+ 	  labelDolar=new Label("Dolar ... ");   
+
+      controlPanel = new Panel();
+      controlPanel.setLayout(new FlowLayout());
+
+      frame.add(controlPanel);
+      frame.setVisible(true);  
+   }
+	
+	public void show(){
+		
+		Panel panel = new Panel();
+        panel.setBackground(Color.YELLOW);
+        panel.setSize(300,300);
+        GridBagLayout layout = new GridBagLayout();
+
+        panel.setLayout(layout);        
+        GridBagConstraints gbc = new GridBagConstraints();
+        
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.ipady = 10;
+        gbc.gridx = 1;
+        gbc.gridy = 0;
+		layout.setConstraints(labelEuro,gbc);	
+		panel.add(labelEuro, gbc);
+		button1.addActionListener(this);
+		
+		gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.ipady = 10;
+        gbc.gridx = 0;
+        gbc.gridy = 1;
+		layout.setConstraints(label2,gbc);	
+		panel.add(label2, gbc);
+		
+		gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.ipady = 10;
+        gbc.gridx = 1;
+        gbc.gridy = 1;
+		layout.setConstraints(field1,gbc);	
+		panel.add(field1, gbc);
+		
+		gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.gridx = 0;
+        gbc.gridy = 2;
+        layout.setConstraints(button1,gbc);
+		panel.add(button1, gbc);
+		
+		gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.gridx = 2;
+        gbc.gridy = 2;
+		panel.add(button2, gbc);
+		
+		gbc.fill = GridBagConstraints.HORIZONTAL;
+		gbc.ipady = 10;
+        gbc.gridx = 1;
+        gbc.gridy = 3;
+        layout.setConstraints(field2,gbc);
+		panel.add(field2, gbc);
+		
+		
+		gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.gridx = 2;
+        gbc.gridy = 3;
+		panel.add(label1, gbc);
+		button2.addActionListener(this);
+		
+
+		frame.add(panel);		
+		controlPanel.add(panel);
+        frame.setVisible(true);
+	}
+	
+	public static void main(String args[]){
+		try{
+         URL url = new URL("http://www.tcmb.gov.tr/kurlar/today.html");
+         URLConnection urlConnection = url.openConnection();
+         HttpURLConnection connection = null;
+         if(urlConnection instanceof HttpURLConnection)
+         {
+            connection = (HttpURLConnection) urlConnection;
+         }
+         else
+         {
+            System.out.println("Please enter an HTTP URL.");
+            return;
+         }
+         BufferedReader in = new BufferedReader(
+         new InputStreamReader(connection.getInputStream()));
+         String current;
+         
+         
+         while((current = in.readLine()) != null)
+         {
+         	if(current.contains("EURO")){
+         		String after = current.trim().replaceAll(" +", " ");
+            	parts = after.split(" ");
+            	values.add(parts[3]);//doviz alis
+            	values.add(parts[4]);//doviz satis
+         	}
+         }
+
+      }catch(IOException e)
+      {
+         e.printStackTrace();
+      }
+      
+      euroTlConverter pencere=new euroTlConverter();
+	  pencere.show();
+	}
+	
+	public void actionPerformed(ActionEvent e){
+		
+		String s=e.getActionCommand();
+		
+		if(s.equals("TL'ye ÇEVİR")){
+			s1=field1.getText();
+			if(!s1.equals("")){
+				cevrilen_para1=(Double.valueOf(s1))*Double.parseDouble(values.get(1)); //Doviz Satis
+				String cevrilen_para1_string=Double.toString(cevrilen_para1);
+				field2.setText(cevrilen_para1_string);
+				label1.setText(" TL");
+			}
+		}
+		if(s.equals("EURO'ya ÇEVİR")) {
+			s2=field1.getText();
+			if(!s2.equals("")){
+				cevrilen_para2=(Double.valueOf(s2))/Double.parseDouble(values.get(0)); //Doviz Alis
+				String cevrilen_para2_string=Double.toString(cevrilen_para2);
+				field2.setText(cevrilen_para2_string);
+				label1.setText(" Euro");
+			}
+		}
+	}
+
+	
+	public void windowOpened(WindowEvent e){}
+	public void windowClosed(WindowEvent e){}
+	public void windowIconified(WindowEvent e){}
+	public void windowDeiconified(WindowEvent e){}
+	public void windowActivated(WindowEvent e){}
+	public void windowDeactivated(WindowEvent e){}
+}
