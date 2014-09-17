@@ -32,7 +32,6 @@ public class euro_tl implements WindowListener, ActionListener
         
         	
             a.setSize(500,500);
-            a.setBackground(Color.white);
             a.setLocation(500,500);
             a.setBackground(Color.yellow);
             b.add(c);
